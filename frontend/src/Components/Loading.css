@@ -1,0 +1,21 @@
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loadingCircle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #b716dd;
+  border-top-color: #171717;
+  animation: loading 1s linear infinite;
+}
