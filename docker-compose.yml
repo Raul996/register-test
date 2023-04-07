@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  mongodp:
+    image: "mongo:5.0.9-focal"
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "rauluser"
+      MONGO_INITDB_ROOT_PASSWORD: "password"
+      MONGO_REPLICA_HOST: mongodp
+      MONGO_REPLICA_PORT: 27018
+
+  api:
+    build: ./api
+    container_name: api_backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./api/:/app
+      - /api/node_modules
+    depends_on:
+      - mongodp
+
+  forntend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/:/reactApp
+      - /frontend/node_modules
+    depends_on:
+      - api
+
+volumes:
+  data:
